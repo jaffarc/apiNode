@@ -1,0 +1,22 @@
+{
+    "opts": {
+        "destination": "./docd/",
+        "template": "node_modules/tui-jsdoc-template",
+        "encoding": "utf8",
+        "recurse": true
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "source": {
+        "include": "./src",
+        "includePattern": ".js$"
+    },
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "markdown": {
+        "parser": "gfm",
+        "hardwrap": true
+    }
+}

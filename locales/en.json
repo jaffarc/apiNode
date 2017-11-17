@@ -1,0 +1,7 @@
+{
+	"USER_SUCCESSFULLY": "User successfully registered",
+	"REGISTRATION_ERROR_USER": "There was an error in registering",
+	"REGISTRATION_ERROR_EMAIL": "E-mail already registered",
+	"NO_FOUND_USER": "No records found",
+	"LIST_ERROR_PARAM": "There was an error in the user search"
+}
