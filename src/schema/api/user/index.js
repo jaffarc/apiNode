@@ -1,5 +1,5 @@
-const {Schema} = require('mongoose'),
-    ObjectId = Schema.ObjectId;
+const { Schema } = require('mongoose');
+//  ObjectId = Schema.ObjectId;
 
 /**
  * @desc Definition of Profile Schema
@@ -10,7 +10,7 @@ const {Schema} = require('mongoose'),
  * @property {boolean} status - Flag indicating whether the document is active or not
 */
 const UserSchema = new Schema({
-    email:{
+    email: {
         type: String,
         unique: true,
         required: true

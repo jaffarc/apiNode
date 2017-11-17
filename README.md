@@ -1,5 +1,5 @@
 # API NODEJS PATTERNS
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/763316dc80c84317bd1d8f10423c99a5)](https://www.codacy.com/app/jaffar.cardoso/apiNode?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jaffarc/apiNode&amp;utm_campaign=Badge_Grade)
 
 
 ## About connecting to all dbs

@@ -20,7 +20,7 @@ exports.db = async (app) => {
         return mongoose.connect(mongoUrl, { keepAlive: 300000, connectTimeoutMS: 30000, useMongoClient: true })
             .then(() => {
                 require('../../schema/api')(mongoose);
-                return mongoose
+                return mongoose;
             })
             .catch(err => console.error(err));
         /**
