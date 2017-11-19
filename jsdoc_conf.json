@@ -1,6 +1,6 @@
 {
     "opts": {
-        "destination": "./docd/",
+        "destination": "./docs/",
         "template": "node_modules/tui-jsdoc-template",
         "encoding": "utf8",
         "recurse": true

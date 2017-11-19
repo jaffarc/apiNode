@@ -54,8 +54,7 @@ exports.responseHandler = (error) => {
     });
     if (error.code === 11000) {
         let keyErrorRegex = /duplicate key error index:\s+(.+?)\s+/g;
-        let duplicateKey = keyErrorRegex.exec(error.err);
-        if (!duplicateKey) {
+        if (!keyErrorRegex.exec(error.err)) {
             return 0;
         }
         return 0;
