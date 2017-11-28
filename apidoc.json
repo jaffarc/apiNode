@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "uma agenda simple, cadastro, edit, list. If Testing API extension for visual code  <a href='  https://marketplace.visualstudio.com/items?itemName=just4developments.testing-api'>testing-api</a>",
     "title": "Projeto Agenda",
-    "url" : "http://api-dev.starmaker.com.br",
+    "url" : "",
     "sampleUrl": false,
     "template": {
         "forceLanguage": "pt_br"
