@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose'),
+    conn = require('../../../connection'),
     ObjectId = Schema.ObjectId;
 
 /**
@@ -9,19 +10,21 @@ const { Schema } = require('mongoose'),
 * @property {ObjectId} profile - Profile Schema Reference
 * @property {boolean} status - Flag indicating whether the document is active or not
 */
-const accessSchema = new Schema({
-    user: {
-        type: ObjectId,
-        required: false
-    },
-    status: {
-        type: Boolean,
-        required: false,
-        default: 1
+const accessSchema = new Schema(
+    {
+        user: {
+            type: ObjectId,
+            required: false
+        },
+        status: {
+            type: Boolean,
+            required: false,
+            default: 1
+        }
+    }, {
+        collection: 'access',
+        timestamps: true
     }
-}, {
-    collection: 'user',
-    timestamps: true
-});
+);
 
-module.exports = (dblog) => dblog.model('access', accessSchema);
+exports.SchemaAccss = conn.model('access', accessSchema);

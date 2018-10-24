@@ -1,4 +1,5 @@
-const { Schema } = require('mongoose');
+const { Schema } = require('mongoose'),
+    conn = require('../../../connection/index');
 //  ObjectId = Schema.ObjectId;
 
 /**
@@ -9,20 +10,26 @@ const { Schema } = require('mongoose');
  * @property {ObjectId} profile - Profile Schema Reference
  * @property {boolean} status - Flag indicating whether the document is active or not
 */
-const UserSchema = new Schema({
-    email: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    status: {
-        type: Boolean,
-        required: false,
-        default: 1
+const UserSchema = new Schema(
+    {
+        email: {
+            type: String,
+            unique: true,
+            required: true
+        },
+        password: {
+            type: String,
+            required: true
+        },
+        status: {
+            type: Boolean,
+            required: false,
+            default: 1
+        },
+    }, {
+        collection: 'user',
+        timestamps: true
     }
-}, {
-    collection: 'user',
-    timestamps: true
-});
+);
 
-module.exports = (db) => db.model('user', UserSchema);
+exports.schemaUser =  conn.model('user', UserSchema);

@@ -1,5 +1,5 @@
 {
-  "name": "jasmine_test",
+  "name": "apiNodejs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,31 +8,43 @@
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
+    "express-jwt": "^5.3.1",
     "express-language": "0.0.2",
     "express-request-language": "^1.1.15",
     "gettext": "0.0.1",
+    "http": "0.0.0",
     "i18n": "^0.8.3",
     "istanbul": "^1.0.0-alpha.2",
-    "jasmine": "^2.8.0",
+    "jasmine": "^3.2.0",
     "jasmine-supertest": "^1.0.0",
-    "mongoose": "^4.13.2",
+    "mongoose": "^5.3.4",
     "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "request": "^2.83.0",
-    "supertest": "^3.0.0"
+    "supertest": "^3.3.0"
   },
   "devDependencies": {
+    "coveralls": "^3.0.0",
     "docdash": "^0.4.0",
+    "grand": "^1.1.0",
+    "jasmine-awesome-report": "0.0.3",
     "jasmine-pretty-html-reporter": "^0.2.5",
     "jasmine-spec-reporter": "^4.2.1",
+    "jasmine-ts-console-reporter": "^3.1.1",
     "jsdoc": "^3.5.5",
     "minami": "^1.2.3",
+    "mochawesome": "^2.3.1",
+    "nyc": "^11.5.0",
+    "serve": "^6.0.6",
     "tui-jsdoc-template": "^1.2.2"
   },
   "scripts": {
-    "test": "istanbul cover -x ./  --report text --report lcov jasmine test/**/**/*_[sS]pec.js",
+    "test": "NODE_ENV=test istanbul cover -x ./  --report text --report lcov jasmine test/**/**/*_[sS]pec.js",
     "start": "nodemon index.js",
     "gen-doc": "apidoc -i src/ -o apidoc/ && jsdoc -c ./jsdoc_conf.json"
   },
-  "author": "",
+  "author": "Jaffar Cardoso",
   "license": "ISC"
 }

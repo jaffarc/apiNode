@@ -1,4 +1,5 @@
-const { responseHandler, ObjectIdCast } = require('../../../utils');
+const { schemaUser } = require('../../../schema/api/user'),
+    { responseHandler, ObjectIdCast } = require('../../../utils');
 /**
 * @description Register new user
 * @author jaffar cardoso <jaffa.cardoso@gmail.com>
@@ -8,9 +9,9 @@ const { responseHandler, ObjectIdCast } = require('../../../utils');
 * @returns {Promise.<Object>} The result
 * @throws Will throw an error if the argument is null.
 */
-exports.register = async (email) => {
-    let user = global.db.model('user');
-    let post = new user({ email: email, status: true });
+exports.register = async (email, senha) => {
+
+    let post = new schemaUser({ email: email, password: senha, status: true });
 
     return post.save().then(() => {
         return true;
@@ -31,8 +32,8 @@ exports.register = async (email) => {
 */
 exports.list = async () => {
     try {
-        let user = global.db.model('user');
-        return await user.find().select({ __v: 0 }).exec();
+
+        return await schemaUser.find().select({ __v: 0 }).exec();
     } catch (error) {
         throw responseHandler(error);
     }
@@ -46,10 +47,38 @@ exports.list = async () => {
 * @returns {Promise.<Object>} The result
 * @throws Will throw an error if the argument is null.
 */
-exports.findPost = async (id) => {
+const findPost = async (id) => {
     try {
-        let user = global.db.model('user');
-        return await user.find({ _id: ObjectIdCast(id) }).select({ __v: 0 }).exec();
+        return await schemaUser.aggregate([
+            {
+                $redact: {
+                    $cond: {
+                        if: { $eq: ['$_id', ObjectIdCast(id)] },
+                        then: '$$PRUNE',
+                        else: '$$KEEP'
+                    }
+                }
+            }
+        ]).exec();
+    } catch (error) {
+        throw responseHandler(error);
+    }
+};
+
+exports.findPost = findPost;
+exports.findGet = findPost;
+
+/**
+* @description list all user
+* @author jaffar cardoso <jaffa.cardoso@gmail.com>
+* @async
+* @function list
+* @returns {Promise.<Object>} The result
+* @throws Will throw an error if the argument is null.
+*/
+exports.remove = async (id) => {
+    try {
+        return await schemaUser.deleteMany({ '_id': ObjectIdCast(id) }).exec();
     } catch (error) {
         throw responseHandler(error);
     }

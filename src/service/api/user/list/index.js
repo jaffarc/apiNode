@@ -9,18 +9,13 @@ const { list } = require('../../../../repository/api/user');
 * @throws Will throw an error if the argument is null.
 */
 exports.listUser = async (obj) => {
-    try {
-        return await list(obj.email).then((result) => {
-            //console.log('result', result);
-            let resulObj = !result ? { msg: 'NO_FOUND_USER' } : result;
-            return { status: !result ? false : true, resulObj};
-        }).catch((err) => {
-            console.log('registerUser errr:', err);
-            return { status: false, msg: !err ? 'REGISTRATION_ERROR_EMAIL' : 'REGISTRATION_ERROR_USER' };
-        });
 
-    } catch (error) {
-
-        return { message: 'REGISTRATION_ERROR_USER' };
-    }
+    return await list(obj.email).then(result => {
+        //console.log('result', result);
+        let resulObj = !result ? { msg: 'NO_FOUND_USER' } : result;
+        return { status: !result ? false : true, resulObj };
+    }).catch(err => {
+        console.log('registerUser errr:', err);
+        return { status: false, msg: !err ? 'REGISTRATION_ERROR_EMAIL' : 'REGISTRATION_ERROR_USER' };
+    });
 };

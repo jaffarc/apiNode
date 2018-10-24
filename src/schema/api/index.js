@@ -4,6 +4,4 @@
  * @requires profile
  * @requires user
  */
-module.exports = async (db) => {
-    await require('./user')(db);
-};
+module.exports = async () => await require('./user');

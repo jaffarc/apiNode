@@ -4,11 +4,10 @@ const express = require('express'),
     i18n = require('i18n'),
     app = express();
 
-require('./process')(app);
 
 app.all('*', (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Headers', 'Content-type, Accept, Authorization');
 
@@ -31,8 +30,8 @@ app.use(
     bodyParser.urlencoded({ extended: true })
 );
 
-require('./src/connection/log')(app);
-require('./src/connection/agenda')(app);
+
+
 
 module.exports = app;
 

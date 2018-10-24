@@ -1,7 +1,6 @@
 module.exports = (app) => {
 
-    require('./api')(app);
+    app.use('/api', require('./api/user')());
 
-    return false;
+    
 };
-
