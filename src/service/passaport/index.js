@@ -3,11 +3,6 @@ module.exports = () => {
         passport = require('passport'),
         JwtStrategy = require('passport-jwt').Strategy,
         ExtractJwt = require('passport-jwt').ExtractJwt,
-        //secret = require('../../config/email.json').token.key,
-        // { getUserByEmailSenha } = require('../service/usuario'),
-        // { findByUsuarioPerfil } = require('../repository/usuario'),
-        { decrypt, encrypt, getMD5 } = require('../../utils'),
-
         localOptions = {
             usernameField: 'login',
             passwordField: 'password'
@@ -22,9 +17,7 @@ module.exports = () => {
      **/
     passport.use(new LocalStrategy(localOptions, (email, senha, done) => {
 
-        console.log('LOGIN', email, senha)
-        // const senhaDecrypt = decrypt(senha, true),
-        //     senhaEncrypted = encrypt(getMD5(senhaDecrypt), true);
+        console.log('LOGIN', email, senha);
 
         // getUserByEmailSenha(email, senhaEncrypted).then((user) => {
 
@@ -42,23 +35,7 @@ module.exports = () => {
      */
     passport.use(new JwtStrategy(opts, (payload, done) => {
         try {
-            const auth = JSON.parse(decrypt(payload.auth)),
-                perfilId = auth.perfil,
-                usuarioId = auth.usuario,
-                tipo = auth.tipo;
-
-            // findByUsuarioPerfil(usuarioId, perfilId).then((usuario) => {
-
-            //     if (!usuario || !usuario.perfil || !usuario.perfil.length) {
-            //         return done(null, false);
-            //     }
-
-            //     if (tipo === 'change-password') {
-            //         // console.log('change: ', tipo);
-            //     }
-
-            //     return done(null, usuario);
-            // }).catch((err) => done(err, false, { message: 'Usuário não autorizado' }));
+            return done(null, 'token');
 
         } catch (err) {
             return done(err.message, false);
