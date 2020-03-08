@@ -8,3 +8,5 @@ node_modules
 _package _old.json
 _router
 .nyc_output
+_teste
+_test
