@@ -1,32 +1,52 @@
 const mongoose = require('mongoose');
-const config = require('../../config/bd');
 
-
-let dbPrincipal = 'test';
-const createConnection = (name) => {
-    mongoose.Promise = Promise;
-    let options = {
-        keepAlive: 300000,
-        connectTimeoutMS: 0,
-        reconnectTries: 30,
-        useNewUrlParser: true,
-        useCreateIndex: true,
-
-    };
-
-    console.log('BANCO', name);
-
-    let mongoUrl = `mongodb://${config[name].MONGO_USER}:${config[name].MONGO_PWD}@${config[name].MONGO_HOST}:${config[name].MONGO_PORT}/${config[name].MONGO_DB}?authSource=${config[name].MONGO_DB}&authMechanism=SCRAM-SHA-1`;
-
-    console.log('BANCOURL', mongoUrl);
-    let db = mongoose.createConnection(mongoUrl, options);
-
-
-    return db;
+let options = {
+  keepAlive: 300000,
+  connectTimeoutMS: 30000,
+  socketTimeoutMS: 30000,
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  bufferMaxEntries: 0,
+  poolSize: 30,
+  useUnifiedTopology: true,
 };
+/**
+ * conn with user:passwork
+ */
+//let mongoUrl = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${ process.env.DB_NAME}?authSource=${process.env.DB_AUTH}&authMechanism=SCRAM-SHA-1`;
 
-module.exports = createConnection(dbPrincipal);
+let mongoUrl = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 
-module.exports.on = createConnection;
+mongoose.set('useCreateIndex', true);
+const db = mongoose.createConnection(mongoUrl, options);
+
+db.once('connected', () => {
+  console.log(`Mongodb connection ${process.env.DB_NAME}`);
+  return db;
+});
+
+db.on('disconnected', () => {
+  console.log('connection disconnected');
+});
+
+db.on('error', (err) => {
+  console.log('Error in mongodb connection: ', err);
+});
+
+process.on('exit', (code) => {
+  db.close();
+  console.log(`About to exit with code: ${code}`);
+});
+process.on('SIGINT', function () {
+  console.log('Caught interrupt signal');
+  process.exit();
+});
+
+exports.api = db.useDb('api');
+/**
+ * export other db.
+ */
+//exports.log = db.useDb('log');
+
 
 

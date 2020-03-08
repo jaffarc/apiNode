@@ -4,7 +4,7 @@
  * @module Library/Utils
  */
 const mongoose = require('mongoose'),
-    request = require('request');
+  request = require('request');
 
 
 exports.ObjectIdCast = mongoose.mongo.ObjectId;
@@ -26,41 +26,41 @@ exports.resJsonP = (res, code, sucesso, retorno) => res.status(code).jsonp({ suc
 * @return {number} retorna se nao tiver erro do mongodb
 */
 exports.responseHandler = (error) => {
-    let options = {
-        method: 'post',
-        body: {
-            'metadata': {
-                'title': '/api/register/user',
-                'type': 'error',
-                'icon': 'fa-bug'
-            },
-            'body': {
-                'error': error,
-                'error_description': error.errmsg
-            }
-        },
-        json: true,
-        url: 'http://localhost:4000/api/log/default',
-        headers: {
-            'Accept': 'application/json'
-        }
-    };
-
-    request(options, function (err) {
-        if (err) {
-            console.log('Error :', err);
-            return false;
-        }
-    });
-    if (error.code === 11000) {
-        let keyErrorRegex = /duplicate key error index:\s+(.+?)\s+/g;
-        let duplicateKey = keyErrorRegex.exec(error.err);
-        if (!duplicateKey) {
-            return 0;
-        }
-        return 0;
+  let options = {
+    method: 'post',
+    body: {
+      'metadata': {
+        'title': '/api/register/user',
+        'type': 'error',
+        'icon': 'fa-bug'
+      },
+      'body': {
+        'error': error,
+        'error_description': error.errmsg
+      }
+    },
+    json: true,
+    url: 'http://localhost:4000/api/log/default',
+    headers: {
+      'Accept': 'application/json'
     }
-    return false;
+  };
+
+  request(options, function (err) {
+    if (err) {
+      console.log('Error :', err);
+      return false;
+    }
+  });
+  if (error.code === 11000) {
+    let keyErrorRegex = /duplicate key error index:\s+(.+?)\s+/g;
+    let duplicateKey = keyErrorRegex.exec(error.err);
+    if (!duplicateKey) {
+      return 0;
+    }
+    return 0;
+  }
+  return false;
 };
 
 

@@ -5,3 +5,5 @@ doc_static
 doc-fun
 docd
 node_modules
+_package _old.json
+_router

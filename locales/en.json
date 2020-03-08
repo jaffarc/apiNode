@@ -2,8 +2,10 @@
 	"USER_SUCCESSFULLY": "User successfully registered",
 	"REGISTRATION_ERROR_USER": "There was an error in registering",
 	"REGISTRATION_ERROR_EMAIL": "E-mail already registered",
-	"USER_REMOVE_SUCCESSFULLY":"Register removed successfully ",
+	"USER_REMOVE_SUCCESSFULLY": "Register removed successfully ",
 	"NO_FOUND_USER": "No records found",
 	"LIST_ERROR_PARAM": "There was an error in the user search",
-	"find is not defined": "find is not defined"
+	"find is not defined": "find is not defined",
+	"Cannot destructure property `name` of 'undefined' or 'null'.": "Cannot destructure property `name` of 'undefined' or 'null'.",
+	"Cannot read property 'status' of null": "Cannot read property 'status' of null"
 }

@@ -1,35 +1,39 @@
 const { Schema } = require('mongoose'),
-    conn = require('../../../connection/index');
-//  ObjectId = Schema.ObjectId;
-
+  { api } = require('../../../connection/');
 /**
- * @desc Definition of Profile Schema
+ * @desc Definition of user Schema
  * @name used
  * @memberof documents/Schema#
  * @property {string} email - Email is used as a login
- * @property {ObjectId} profile - Profile Schema Reference
+ * @property {string} password - password do user criptor
  * @property {boolean} status - Flag indicating whether the document is active or not
 */
-const UserSchema = new Schema(
-    {
-        email: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        password: {
-            type: String,
-            required: true
-        },
-        status: {
-            type: Boolean,
-            required: false,
-            default: 1
-        },
-    }, {
-        collection: 'user',
-        timestamps: true
-    }
-);
-
-exports.schemaUser =  conn.model('user', UserSchema);
+const UserSchema = new Schema({
+  email: {
+    type: String,
+    unique: true,
+    lowercase: true,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  last: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  status: {
+    type: Boolean,
+    required: false,
+    default: 1
+  },
+}, {
+  collection: 'user',
+  timestamps: true
+});
+module.exports = api.model('User', UserSchema, 'user');

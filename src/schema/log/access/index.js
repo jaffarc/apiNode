@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose'),
-    conn = require('../../../connection'),
-    ObjectId = Schema.ObjectId;
+  { log } = require('../../../connection'),
+  ObjectId = Schema.ObjectId;
 
 /**
 * @desc Definition of Profile Schema
@@ -11,20 +11,20 @@ const { Schema } = require('mongoose'),
 * @property {boolean} status - Flag indicating whether the document is active or not
 */
 const accessSchema = new Schema(
-    {
-        user: {
-            type: ObjectId,
-            required: false
-        },
-        status: {
-            type: Boolean,
-            required: false,
-            default: 1
-        }
-    }, {
-        collection: 'access',
-        timestamps: true
+  {
+    user: {
+      type: ObjectId,
+      required: false
+    },
+    status: {
+      type: Boolean,
+      required: false,
+      default: 1
     }
+  },
+  {
+    collection: 'access',
+    timestamps: true
+  }
 );
-
-exports.SchemaAccss = conn.model('access', accessSchema);
+module.exports = log.model('Access', accessSchema, 'access');

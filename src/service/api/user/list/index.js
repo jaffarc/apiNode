@@ -10,12 +10,12 @@ const { list } = require('../../../../repository/api/user');
 */
 exports.listUser = async (obj) => {
 
-    return await list(obj.email).then(result => {
-        //console.log('result', result);
-        let resulObj = !result ? { msg: 'NO_FOUND_USER' } : result;
-        return { status: !result ? false : true, resulObj };
-    }).catch(err => {
-        console.log('registerUser errr:', err);
-        return { status: false, msg: !err ? 'REGISTRATION_ERROR_EMAIL' : 'REGISTRATION_ERROR_USER' };
-    });
+  return await list(obj.email).then(result => {
+    //console.log('result', result);
+    let resulObj = !result ? { msg: 'NO_FOUND_USER' } : result;
+    return { status: !result ? false : true, resulObj };
+  }).catch(err => {
+    console.log('registerUser errr:', err);
+    return { status: false, msg: !err ? 'REGISTRATION_ERROR_EMAIL' : 'REGISTRATION_ERROR_USER' };
+  });
 };
